@@ -1,0 +1,88 @@
+/* Modal Background Overlay */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Modal Container */
+.modalContainer {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Header */
+.modalHeader h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Modal Body */
+.modalBody {
+    margin: 20px 0;
+}
+
+.modalBody p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Modal Footer */
+.modalFooter {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btnLogin {
+    background-color: #007bff;
+    color: white;
+}
+
+.btnLogin:hover {
+    background-color: #0056b3;
+}
+
+.btnGoBack {
+    background-color: #ccc;
+    color: black;
+}
+
+.btnGoBack:hover {
+    background-color: #999;
+}
+
+.inputField {
+    border: grey solid 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.inputField:required:valid {
+    border: solid limegreen;
+}
+
+.inputField:required:invalid {
+    border: solid red;
+}

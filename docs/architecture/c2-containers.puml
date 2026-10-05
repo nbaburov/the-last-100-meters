@@ -1,0 +1,35 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/java.puml
+!include DEVICONS/mysql.puml
+
+Person(delivery, "Delivery", "Brings in packages with QR codes that will be routed within the office")
+Person(employee, "Employee", "Company employees that make an order with their corporate email")
+Person_Ext(rob, "Office Robot", "Office robots with load capacity that transport packages to employees", $sprite="robot2")
+System_Ext(robotDrive, "Robot Pathing System")
+System_Ext(email, "Email System")
+System_Ext(lock, "Smart Locker System")
+System_Boundary(packageRouting, "Inter Office Package Routing System"){
+ContainerDb(db, "Database", "MySQL", "Stores employee data, sucha as emails and workplace, office maps...", $sprite="mysql")
+Container(back, "REST API", "SpringBoot", "Links packages to employees, decides robots to use, notifies of package arrival...", $sprite="java")
+Container(front, "Web Application", "React", "Scans incoming packages, lets employees track their packages and allows for bot visualization", $sprite="react")
+}
+Rel_D(delivery, front, "Delivers and scans package for processing")
+Rel_D(back, robotDrive, "Gives employee position within office and package")
+Rel_D(back, email, "Sends email")
+Rel_D(robotDrive, rob, "Paths robot through office without collision")
+Rel_L(rob, employee, "Delivers package to employee")
+Rel_D(email, employee, "Notifies employee of package arrival")
+Rel_D(employee, lock, "Retrieves packages that were stored instead of delivered")
+Rel_U(employee, front, "Checks on package status or locker location")
+Rel_D(rob, lock, "Stores package on locker if employee not present")
+
+Rel_R(front, back, "Makes calls to the API", "HTTPS/JSON")
+Rel_R(back, db, "Reads and writes data")
+
+SHOW_LEGEND()
+@enduml

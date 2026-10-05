@@ -1,0 +1,55 @@
+/* Container to hold the dropdown button and menu */
+.dropdownContainer {
+    position: relative;
+    display: inline-block;
+}
+
+/* The circular button that triggers the dropdown */
+.dropdownBtn {
+    width: 120px; /* Smaller size for the button */
+    height: 40px; /* Smaller height */
+    background-color: #eaeaea; /* Blue background */
+    color: dimgray;
+    border-radius: 20px; /* Make it round with more edge radius */
+    border: #e5e7eb 3px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px; /* Smaller text */
+    cursor: pointer;
+    padding: 0 10px; /* Add some padding to make text fit better */
+    text-align: center;
+    user-select: none;
+}
+
+.dropdownBtn:hover {
+    background-color: #e5e7eb; /* Darker blue on hover */
+}
+
+/* The actual dropdown menu */
+.dropdownMenu {
+    position: absolute;
+    top: 50px;  /* Distance from the button */
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for better visibility */
+    border-radius: 8px;
+    min-width: 120px;
+    z-index: 1; /* Ensure it appears above other elements */
+}
+
+/* Each item inside the dropdown */
+.dropdownItem {
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdownItem:last-child {
+    border-bottom: none;
+}
+
+.dropdownItem:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+}

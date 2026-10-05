@@ -1,0 +1,49 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/mysql.puml
+
+Container(front, "Web Application", "React", $sprite="react")
+ContainerDb(db, "Database", "MySQL", $sprite="mysql")
+
+Boundary(back, "REST API", "Spring"){
+Component(accCont, "Account Controller", "Spring REST Controller", "Gives the endpoints for users to log in, notably: Admins, Employees and Secretaries")
+Component(packCont, "Package Controller", "Spring REST Controller", "Gives the endpoints for packages to be recieved or for users to check on their packages")
+
+Component(accServ, "Account Service", "Spring Service", "Provides the bussiness logic to create accounts and checks for log-ins")
+Component(packServ, "Package Service", "Spring Service", "Connects packages to users, processes the package arrival, sends notifications, starts the mapping and delivery...")
+Component(mapServ, "Mapping Service", "Spring Service", "With the use of maps, it creates a route between the start point and end point")
+
+Component(accRepo, "Account Repository", "Spring JPA Repository", "Stablishes the connection between accounts and database")
+Component(packRepo, "Package Repository", "Spring JPA Repository", "Stablishes the connection between the different packages and their info on the db")
+Component(mapRepo, "Mapping Repository", "Spring JPA Repository", "Stores the maps that are used for routing")
+}
+
+Component_Ext(robServ, "Robot Service", "External Service", "Provides bussiness logic for user and salesman messages")
+
+Rel_D(front, packCont, "Makes API calls", "HTTP/JSON")
+Rel_D(front, accCont, "Makes API calls", "HTTP/JSON")
+
+Rel_D(packCont, packServ, "Logs package arrival and retrieves state")
+Rel_D(accCont, accServ, "Gives credentials to check")
+Rel(accCont, packServ, "Associates an account to package")
+
+Rel_R(mapServ, robServ, "Posts")
+Rel_L(robServ, mapServ, "Subscribes")
+Rel_R(packServ, mapServ, "Gives start and end points")
+
+Rel_D(packServ, packRepo, "Uses")
+Rel_D(accServ, accRepo, "Uses")
+Rel_D(mapServ, mapRepo, "Uses")
+
+Rel_D(packRepo, db, "Maps package information to database columns")
+Rel_D(accRepo, db, "Maps accounts information to database columns")
+Rel_D(mapRepo, db, "Retrieves maps of office information")
+
+SHOW_LEGEND()
+@enduml

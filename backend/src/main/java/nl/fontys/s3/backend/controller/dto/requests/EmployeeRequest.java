@@ -1,0 +1,20 @@
+package nl.fontys.s3.backend.controller.dto.requests;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class EmployeeRequest {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String photo;
+    private int endFloorIndex;
+    private int endRow;
+    private int endCol;
+
+}

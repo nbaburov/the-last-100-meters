@@ -1,0 +1,13 @@
+FROM eclipse-temurin:17-jdk AS build
+WORKDIR /opt/app
+COPY gradlew settings.gradle build.gradle ./
+COPY gradle gradle
+RUN chmod +x gradlew && ./gradlew --no-daemon dependencies > /dev/null
+COPY src src
+RUN ./gradlew --no-daemon bootJar -x test
+
+FROM eclipse-temurin:17-jre
+WORKDIR /opt/app
+COPY --from=build /opt/app/build/libs/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar app.jar"]
