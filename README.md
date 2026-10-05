@@ -4,7 +4,7 @@ An office delivery system: a parcel arrives at reception, its barcode is scanned
 
 Group project for Sioux Technologies, Fontys University of Applied Sciences (ICT & Software Engineering, semester 3, September 2024 to January 2025). This repository is the archived version, cleaned up to boot with a single command and seeded demo data.
 
-Write-up: [The last-mile problem, inside one building](https://nb.nb-limited.com/writing/the-last-100-meters), on how it was built and why it's shaped this way.
+Write-up: [The last-mile problem, inside one building](https://nb.nb-limited.com/writing/the-last-mile-problem-inside-one-building), on how it was built and why it's shaped this way.
 
 | | |
 |---|---|
